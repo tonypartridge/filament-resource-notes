@@ -29,13 +29,14 @@ class NotesAction extends Action
                     'user_id' => auth()->user()->id,
                     'team_id' => auth()->user()->current_team_id,
                     'action_date' => Arr::get($data, 'action_date', null),
-                    'is_pinned' => Arr::get($data, 'is_pinned', false)
+                    'is_pinned' => Arr::get($data, 'is_pinned', false),
                 ]);
                 if (isset($data['media'])) {
                     foreach ($data['media'] as $file) {
                         $fileAdder = $note->addMedia(storage_path(config(
-                            'notes-action.storage_path', 'app/public/'
-                            ) . $file))
+                            'notes-action.storage_path',
+                            'app/public/'
+                        ) . $file))
                             ->toMediaCollection(
                                 config('notes-action.media_collection', 'notes')
                             );
